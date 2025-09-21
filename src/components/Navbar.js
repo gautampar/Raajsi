@@ -6,6 +6,7 @@ import Image from 'next/image';
 import '../styles/Navbar.css';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import OTPLogin from './OTPLogin';
 
 export default function Navbar({ children }) {
   const pathname = usePathname();
@@ -158,17 +159,17 @@ export default function Navbar({ children }) {
                 </div>
               )}
             </div>
-              <button
-                className={`mobile-nav-toggle d-lg-none ${mobileMenuOpen ? 'active' : ''}`}
-                onClick={() => setMobileMenuOpen((open) => !open)}
-                aria-label="Toggle navigation"
-              >
-                <div className="hamburger-icon">
-                  <span className="hamburger-line"></span>
-                  <span className="hamburger-line"></span>
-                  <span className="hamburger-line"></span>
-                </div>
-              </button>
+            <button
+              className={`mobile-nav-toggle d-lg-none ${mobileMenuOpen ? 'active' : ''}`}
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label="Toggle navigation"
+            >
+              <div className="hamburger-icon">
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+                <span className="hamburger-line"></span>
+              </div>
+            </button>
           </div>
         </div>
       </nav>
@@ -188,34 +189,34 @@ export default function Navbar({ children }) {
               </div>
             </button>
           </div>
-          
+
           <div className="drawer-body">
             <div className="nav-section">
               <h3 className="section-title">Navigation</h3>
               <div className="nav-cards">
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className={`nav-card ${isActive("/") ? "active" : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="nav-card-text">ROYAL HOME</span>
                 </Link>
-                <Link 
-                  href="/royal-promises" 
+                <Link
+                  href="/royal-promises"
                   className={`nav-card ${isActive("/royal-promises") ? "active" : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="nav-card-text">THE ROYAL PROMISE</span>
                 </Link>
-                <Link 
-                  href="/our-essence" 
+                <Link
+                  href="/our-essence"
                   className={`nav-card ${isActive("/our-essence") ? "active" : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="nav-card-text">OUR ESSENCE</span>
                 </Link>
-                <Link 
-                  href="/featured-products" 
+                <Link
+                  href="/featured-products"
                   className={`nav-card ${isActive("/featured-products") ? "active" : ""}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -224,22 +225,22 @@ export default function Navbar({ children }) {
                 {/* Removed mobile ACCOUNT nav card to match previous navbar */}
               </div>
             </div>
-            
+
             <div className="action-section">
               <h3 className="section-title">Account</h3>
               <div className="action-cards">
                 <button type="button" className="action-card" onClick={() => { setMobileMenuOpen(false); setLoginOpen(true); }}>
                   <span className="action-card-text">My Account</span>
                 </button>
-                <Link 
-                  href="/cart" 
+                <Link
+                  href="/cart"
                   className="action-card"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="action-card-text">Shopping Cart</span>
                   {cartItems.length > 0 && <span className="cart-badge">{cartItems.reduce((sum, item) => sum + item.qty, 0)}</span>}
                 </Link>
-                <button type="button" className="action-card" onClick={() => { setMobileMenuOpen(false); handleCartClick({preventDefault:()=>{}}); }}>
+                <button type="button" className="action-card" onClick={() => { setMobileMenuOpen(false); handleCartClick({ preventDefault: () => { } }); }}>
                   <span className="action-card-text">Cart Popup</span>
                   {cartItems.length > 0 && <span className="cart-badge">{cartItems.reduce((sum, item) => sum + item.qty, 0)}</span>}
                 </button>
@@ -258,8 +259,11 @@ export default function Navbar({ children }) {
       {loginOpen && (
         <div className="auth-modal-overlay" onClick={() => setLoginOpen(false)}>
           <div className="auth-modal-card" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+          {/* <OTPLogin /> */}
             <button className="auth-close-btn" onClick={() => setLoginOpen(false)} aria-label="Close login">&times;</button>
             <div id="authModalTitle" className="auth-title">LOGIN</div>
+
+            
             <div className="auth-subtitle">Sign-Up For Our Exclusive Launch Now and Get a 0% Discount on Products</div>
             <form onSubmit={(e) => { e.preventDefault(); setLoginOpen(false); router.push('/account'); }} className="auth-form">
               <label className="form-label small fw-semibold mb-1">Name</label>
